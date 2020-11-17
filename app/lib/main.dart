@@ -1,30 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:countdown_flutter/countdown_flutter.dart';
+
+import 'widgets/timer.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Premind());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class Premind extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Premind',
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
           primarySwatch: Colors.blue,
-          // This makes the visual density adapt to the platform that you run
-          // the app on. For desktop platforms, the controls will be smaller and
-          // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: Scaffold(
@@ -34,22 +22,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Timer extends StatelessWidget {
-  final CountdownFormatted _countdown;
+class TimerRow extends StatelessWidget {
+  final Timer _timer;
   final String _name;
 
-  Timer(this._name)
-      : _countdown = CountdownFormatted(
-            duration: Duration(hours: 1),
-            builder: (BuildContext ctx, String remaining) {
-              return Text(remaining); // 01:00:00
-            });
+  TimerRow(this._name)
+      : _timer = Timer(deadline: DateTime.now().add(Duration(minutes: 1)));
 
   @override
   Widget build(BuildContext context) {
     return new Row(
       children: [
-        Expanded(child: _countdown),
+        Expanded(child: _timer),
         Text(_name),
       ],
     );
@@ -62,21 +46,18 @@ class TimerPage extends StatefulWidget {
 }
 
 class _TimerPageState extends State<TimerPage> {
-  final _timers = <Timer>[];
+  final _timers = <TimerRow>[];
 
   Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemCount: _timers.length * 2,
-        itemBuilder: (context, i) {
-          if (i.isOdd) return Divider();
-
-          final index = i ~/ 2;
-          return _buildRow(_timers[index]);
-        });
+    return ListView.separated(
+      padding: EdgeInsets.all(16.0),
+      itemCount: _timers.length,
+      separatorBuilder: (context, i) => Divider(),
+      itemBuilder: (context, i) => _buildRow(_timers[i]),
+    );
   }
 
-  Widget _buildRow(Timer timer) {
+  Widget _buildRow(TimerRow timer) {
     return ListTile(
       title: timer,
     );
@@ -84,7 +65,7 @@ class _TimerPageState extends State<TimerPage> {
 
   void _newTimer(String name) {
     setState(() {
-      _timers.add(new Timer(name));
+      _timers.add(new TimerRow(name));
     });
   }
 
