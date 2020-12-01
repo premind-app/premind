@@ -24,18 +24,21 @@ message User {
 }
 
 message Timer {
+	// Output-only.
+	string id = 1;
+
 	// The ID of the user that created the timer.
-	string creator_id = 1;
+	string creator_id = 2;
 
 	// The user-facing name of the timer.
-	string display_name = 2;
+	string display_name = 3;
 
 	// The time at which the timer expires, as a Unix Epoch Timestamp.
-	uint64 deadline = 3;
+	uint64 deadline = 4;
 
 	// Any number of recipient IDs. Even if the creator's ID is not specified, it will still be
 	// assumed to participate in the timer.
-	repeated string recipient_ids = 4;
+	repeated string recipient_ids = 5;
 }
 
 message CreateUserRequest {

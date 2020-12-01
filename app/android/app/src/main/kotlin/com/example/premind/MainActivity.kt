@@ -1,4 +1,4 @@
-package com.example.premind
+package com.premind.premind
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -4,7 +4,7 @@ import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 
 /// A simple deadline-based timer widget.
-class Timer extends StatefulWidget {
+class Countdown extends StatefulWidget {
   /// The time at which the timer will expire.
   final DateTime deadline;
 
@@ -22,7 +22,7 @@ class Timer extends StatefulWidget {
   static String _defaultFormat(Duration d) =>
       d.toString().replaceFirst(_millisRegex, "");
 
-  const Timer({
+  const Countdown({
     Key key,
     @required this.deadline,
     this.onFinish,
@@ -31,10 +31,10 @@ class Timer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TimerState createState() => _TimerState();
+  _CountdownState createState() => _CountdownState();
 }
 
-class _TimerState extends State<Timer> {
+class _CountdownState extends State<Countdown> {
   // Interval-based async callback timer
   dart_async.Timer _asyncTimer;
 

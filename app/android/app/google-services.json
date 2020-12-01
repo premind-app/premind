@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1098624190228",
+    "firebase_url": "https://premind-1ccce.firebaseio.com",
+    "project_id": "premind-1ccce",
+    "storage_bucket": "premind-1ccce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098624190228:android:2d7830e947b8cbde846401",
+        "android_client_info": {
+          "package_name": "com.premind.premind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098624190228-9nssct5eqqrabdakdu065gejc2sk47sq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWB8ghNDqnkdRIixjOBIAqgV9qg7DP3Ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098624190228-9nssct5eqqrabdakdu065gejc2sk47sq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
