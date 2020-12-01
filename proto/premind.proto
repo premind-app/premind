@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package premind.v0;
+
+// Backend service for Premind. Note that in this version, authentication has not yet been designed,
+// and its implementatio may cause interface changes.
+service Premind {
+	// Create a user. The user's FCM token must be specified.
+	rpc CreateUser(CreateUserRequest) returns (User) {}
+
+	// Update a user. Presently, only the FCM token may be updated.
+	rpc UpdateUser(UpdateUserRequest) returns (User) {}
+
+	// Create a timer.
+	rpc CreateTimer(CreateTimerRequest) returns (Timer) {}
+}
+
+message User {
+	// Output-only.
+	string id = 1;
+
+	// The user's token in Firebase Cloud Messaging.
+	string fcm_token = 2;
+}
+
+message Timer {
+	// The ID of the user that created the timer.
+	string creator_id = 1;
+
+	// The user-facing name of the timer.
+	string display_name = 2;
+
+	// The time at which the timer expires, as a Unix Epoch Timestamp.
+	uint64 deadline = 3;
+
+	// Any number of recipient IDs. Even if the creator's ID is not specified, it will still be
+	// assumed to participate in the timer.
+	repeated string recipient_ids = 4;
+}
+
+message CreateUserRequest {
+	// The user to create.
+	User user = 1;
+}
+
+message UpdateUserRequest {
+	// The user to update.
+	User user = 1;
+}
+
+message CreateTimerRequest {
+	// The timer to create.
+	Timer timer = 1;
+}
